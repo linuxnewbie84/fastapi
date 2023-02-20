@@ -59,14 +59,16 @@ async def userquery2(id:int):
         return list (usrs)[0]
     except:
         return {"message":"Usuario no encontrado"}
-    
+#Query con for en lugar de filter  
 @app.get("/userquery3/")
 async def userquery3(id:int):
     for l in Usuarios_lista:
         if l.id == id:
             return l
         else:
-            return {"message":"Usuario no encontrado"}  
+            return {"message":"Usuario no encontrado"} 
+         
+#Query para operaciones
 @app.get("/calculadora")
 async def calculadora(a:int,b:int):
     return a+b
@@ -74,3 +76,39 @@ async def calculadora(a:int,b:int):
 @app.get('/multi')
 async def multi(a : int, b :int):
     return {"El resultado es":a*b}
+
+#Busqueda con lambda
+
+def sear_user(id:int):
+    usr = filter(lambda u: u.id == id,Usuarios_lista)
+    try:
+        return list (usr)[0]
+    except:
+        return {"message":"Usuario no encontrado"}
+#Post con lambda
+@app.post("/user")
+async def post_user(usuario:Usuario):
+        if type(sear_user(usuario.id)) == Usuario:
+            return {"message":"Usuario ya existe"}
+        else:
+            Usuarios_lista.append(usuario)
+            return {"message":"Usuario creado"}
+        
+#post con for
+@app.post("/usersearch")
+async def post_usersearch(usuario:Usuario):
+    if type(user_search(usuario.id)) == Usuario:
+        return {"message":"Usuario ya existe"}
+    else:
+        Usuarios_lista.append(usuario)
+        return {"message":"Usuario creado"}
+    
+#Busqueda con for
+def user_search(id:int):
+    for l in Usuarios_lista:
+        if l.id == id:
+            return {"message":"El usuario ya existe"}
+        else:
+            Usuarios_lista.append()
+            return {"message":"Usuario creado"}
+
