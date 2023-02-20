@@ -41,6 +41,7 @@ async def user(id:int):
         return {"message":"Usuario no encontrado"}
        
 #Query manda imprime el nombre de un usuario  
+
 @app.get("/userquery/")
 async def userquery(id:int):
     usrs = filter(lambda u: u.id == id,Usuarios_lista)
@@ -58,3 +59,18 @@ async def userquery2(id:int):
         return list (usrs)[0]
     except:
         return {"message":"Usuario no encontrado"}
+    
+@app.get("/userquery3/")
+async def userquery3(id:int):
+    for l in Usuarios_lista:
+        if l.id == id:
+            return l
+        else:
+            return {"message":"Usuario no encontrado"}  
+@app.get("/calculadora")
+async def calculadora(a:int,b:int):
+    return a+b
+
+@app.get('/multi')
+async def multi(a : int, b :int):
+    return {"El resultado es":a*b}
