@@ -1,3 +1,4 @@
+
 from fastapi import FastAPI 
 from pydantic import BaseModel 
 
@@ -111,4 +112,20 @@ def user_search(id:int):
         else:
             Usuarios_lista.append()
             return {"message":"Usuario creado"}
+#Método Post
+
+@app.post('/students')
+async def save(name:str, lastname:str):
+    return "Estudiante {} {} ha sido guardado".format(name, lastname)
+
+#Metodo post Clase Basemodel
+
+class Student(BaseModel):
+    name : str
+    lastname: str
+    age: int
+    
+@app.post('/students2')
+async def stud(studiante:Student):
+    return "Estudiante {} {} ha sido guardado con la edad de {} años".format(studiante.name, studiante.lastname, studiante.age)
 
