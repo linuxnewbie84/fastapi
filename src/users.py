@@ -87,7 +87,9 @@ def sear_user(id:int):
         return list (usr)[0]
     except:
         return {"message":"Usuario no encontrado"}
+    
 #Post con lambda
+
 @app.post("/user")
 async def post_user(usuario:Usuario):
         if type(sear_user(usuario.id)) == Usuario:
