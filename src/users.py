@@ -1,6 +1,7 @@
 
 from fastapi import FastAPI 
 from pydantic import BaseModel 
+from typing import List
 
 app = FastAPI()
 
@@ -129,3 +130,16 @@ class Student(BaseModel):
 async def stud(studiante:Student):
     return "Estudiante {} {} ha sido guardado con la edad de {} años".format(studiante.name, studiante.lastname, studiante.age)
 
+#Metodo post con typing List
+
+class Stf(BaseModel):
+    name: str
+    lastname: str
+    age: int
+    skills : List[str] = []
+#decoradora Post
+
+@app.post("/std")
+async def std(studen:Stf):
+    return "El estudiandte {} {} de {} años de edad, tiene las habilidades de: {}".format(studen.name, studen.lastname, studen.age, studen.skills)
+    
