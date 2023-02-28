@@ -85,7 +85,7 @@ async def update(stud: Estudiante, id: str):
 # Update metódo put recorrido de lista con función anónima
 
 
-@app.put("/update1/{id}", tags=["Aztualizar con lambda"])
+@app.put("/update1/{id}", tags=["Actualizar con lambda"])
 # Tanto para agregar como para actualizar usamos como parametros el objeto que se va a crear y l clase
 async def update_std(id: str, stud: Estudiante):
     srt = filter(lambda x: x.id == id, estud)
